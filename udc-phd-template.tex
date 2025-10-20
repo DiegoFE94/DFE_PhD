@@ -1,0 +1,327 @@
+% **************************************************
+% Document Class Definition
+% **************************************************
+\documentclass[
+	paper=A4,					% paper size --> A4 is default in Germany
+	twoside,					% onesite or twoside printing
+	openright,					% doublepage cleaning ends up right side
+	parskip=full,				% spacing value / method for paragraphs
+	chapterprefix=true,			% prefix for chapter marks
+	11pt,						% font size
+	headings=normal,			% size of headings
+	bibliography=totoc,			% include bib in toc
+	listof=totoc,				% include listof entries in toc
+	titlepage=on,				% own page for each title page
+	captions=tableabove,		% display table captions above the float env
+	draft=false,				% value for draft version
+]{scrreprt}
+
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
+
+% **************************************************
+% Debug LaTeX Information
+% **************************************************
+%\listfiles
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% **************************************************
+% Information and Commands for Reuse
+% **************************************************
+\newcommand{\thesisTitle}{Análisis computacional del microbioma humano como fuente de biomarcadores clínicos}
+\newcommand{\thesisAuthor}{Diego Fernández Edreira}
+\newcommand{\thesisAuthorId}{48112826-T}
+\newcommand{\thesisSubject}{Tesis Doctoral UDC / 2025}
+
+\newcommand{\thesisDate}{Octubre 2025}
+\newcommand{\thesisFullDate}{22~\thesisDate}
+\newcommand{\thesisVersion}{Final version}
+
+\newcommand{\thesisFirstSupervisor}{Dr. Carlos Fernández Lozano}
+\newcommand{\thesisFirstSupervisorTitle}{Dr.}
+
+\newcommand{\thesisSecondSupervisor}{Dr. Jose Liñares Blanco}
+\newcommand{\thesisSecondSupervisorTitle}{Dr.}
+
+\newcommand{\thesisUniversity}{Universidade da Coruña}
+
+\newcommand{\thesisUniversityPhDProgramme}{Programa de doctorado en Tecnologías de la Información y las Comunicaciones}
+
+
+\newcommand{\forceTitleIndent}{\leavevmode{\parindent=2.0em\indent}}
+\newcommand{\forceUdcIndent}{\leavevmode{\parindent=5.0em\indent}}
+\newcommand{\forceIndent}{\leavevmode{\parindent=1.5em\indent}}
+
+% **************************************************
+% Load and Configure Packages
+% **************************************************
+\usepackage[linesnumbered]{algorithm2e} 
+\usepackage[utf8]{inputenc}		% defines file's character encoding
+\usepackage[spanish]{babel}		% babel system, adjust the language of the content
+\usepackage{lettrine}
+\usepackage[					% clean thesis style
+	figuresep=colon,%
+	sansserif=false,%
+	hangfigurecaption=false,%
+	hangsection=true,%
+	hangsubsection=true,%
+	colorize=full,%
+	colortheme=udc,%
+	bibsys=bibtex,%
+%	bibfile=bibliography,%
+	bibstyle=numeric,%
+]{cleanthesis}
+
+\usepackage{xcolor,colortbl} % (fcedron) to set background color on cells
+
+% listing  (fcedron)
+\usepackage{listings}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+% v1 colors
+%\definecolor{best_bg}{RGB}{218,244,223} %fcedron
+%\definecolor{best_font}{RGB}{100,105,100} %fcedron
+%\definecolor{worst_bg}{RGB}{255,218,223} %fcedron
+%\definecolor{worst_font}{RGB}{192,100,104} %fcedron
+
+% v2 colors
+\definecolor{best_bg}{RGB}{198,239,206} %fcedron
+\definecolor{best_font}{RGB}{0,97,41} %fcedron
+\definecolor{worst_bg}{RGB}{255,199,206} %fcedron
+\definecolor{worst_font}{RGB}{156,1,44} %fcedron
+
+\newcommand{\bestRnga}[1]{\cellcolor{best_bg}\textbf{#1}}
+\newcommand{\winRnga}[1]{\cellcolor{best_bg}\textcolor{best_font}{#1}}
+\newcommand{\loseRnga}[1]{\cellcolor{worst_bg}\textcolor{worst_font}{#1}}
+
+% for the best/worst column
+\newcommand{\bwinRnga}[1]{\textcolor{best_font}{#1}}
+\newcommand{\bloseRnga}[1]{\textcolor{worst_font}{#1}}
+
+\lstset{ 
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\hypersetup{					% setup the hyperref-package options
+	pdftitle={\thesisTitle},	% 	- title (PDF meta)
+	pdfsubject={\thesisSubject},% 	- subject (PDF meta)
+	pdfauthor={\thesisAuthor},	% 	- author (PDF meta)
+	plainpages=false,			% 	-
+	colorlinks=false,			% 	- colorize links?
+	pdfborder={0 0 0},			% 	-
+	breaklinks=true,			% 	- allow line break inside links
+	bookmarksnumbered=true,		%
+	bookmarksopen=true			%
+}
+
+% **************************************************
+% BIBLIOGRAPHY
+% **************************************************
+
+\bibliography{bibliography}
+
+
+%%%%%%%%%%%%%%%% My Own packages %%%%%%%%%%%%%%%%%%%%%%%%%%
+% From CHC-RT paper
+\usepackage{amsmath}
+\usepackage{amsfonts} % (fcedron) for approach chapter
+\usepackage{multirow}
+
+% From SSVDAG paper
+\usepackage{longtable}
+\usepackage{xhfill}
+\newcommand{\ditto}{\textquotedbl~~~}
+\usepackage[normalem]{ulem}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{listings}
+\usepackage{subfig}
+
+%%%%%%%%%%%%%%%%%%%%% Misc stuff %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{changepage}
+
+\usepackage{datetime}
+\usepackage[xindy]{glossaries}
+\usepackage{graphbox}
+\usepackage{caption}
+\usepackage{multicol}
+\usepackage{makecell}
+\usepackage[titletoc, header]{appendix}
+\usepackage{hyperref}
+
+%% Add pdfs
+\usepackage{pdfpages}
+
+
+%%% removing warnings
+\usepackage{csquotes}
+\usepackage{scrhack}
+\pdfminorversion=6
+
+\definecolor{udcColor}{RGB}{206,0,130}
+\definecolor{grayColor}{RGB}{186,186,186}
+\definecolor{FIXMEColor}{rgb}{1,0,0}
+\newcommand{\FIXME}[1]{{\color{FIXMEColor}{\textbf{FIXME: #1}}}}
+
+\newcommand{\chapterintro}[1]{	
+	\begingroup
+	\vspace{-5pt}
+	\leftskip3.2em
+	\rightskip\leftskip
+	\setstretch{1.1} \sffamily \small #1
+	\vspace{5pt}
+	\par
+	\endgroup
+}
+
+
+% **************************************************
+% Document CONTENT
+% **************************************************
+\begin{document}
+
+% --------------------------
+% rename document parts
+% --------------------------
+\renewcaptionname{spanish}{\figurename}{Fig.}
+\renewcaptionname{spanish}{\tablename}{Tab.}
+\renewcommand{\lstlistingname}{Lis.}
+\renewcommand{\chaptername}{Capítulo}
+\renewcommand{\contentsname}{Tabla de contenidos}
+\renewcommand{\listtablename}{Índice de tablas}
+\renewcommand{\listfigurename}{Índice de figuras}
+\renewcommand{\bibname}{Referencias}
+\renewcommand{\appendixname}{Anexo}
+
+
+% --------------------------
+% Front matter
+% --------------------------
+\pagenumbering{roman}			% roman page numbing (invisible for empty page style)
+
+\pagestyle{empty}				% no header or footers
+\input{front/01_portada}		% INCLUDE: all titlepages
+\cleardoublepage
+
+\titlespacing*{\chapter}{0pt}{0pt}{0pt} % change the gap around the chapter name
+
+\pagestyle{plain}				% display just page numbers
+
+\input{front/02_declaracion}
+\cleardoublepage
+
+\input{front/03_dedicactoria}
+\cleardoublepage
+
+\input{front/04_agradecimientos}
+\cleardoublepage
+
+\input{front/05_cita}
+\cleardoublepage
+
+\input{front/06_abstracts}			% Include Spanish and Galcian
+\cleardoublepage
+
+\input{front/07_estructura}
+\cleardoublepage
+
+\input{front/08_prefacio}
+\cleardoublepage
+
+
+
+\titlespacing*{\chapter}{0pt}{50pt}{40pt} % restore the gap
+
+\pdfbookmark[0]{\contentsname}{Table of Contents}%
+
+\begin{spacing}{1.2}
+\tableofcontents				% display table of contents
+\cleardoublepage
+\end{spacing}
+
+\listoffigures
+\cleardoublepage
+
+
+% add list of equations
+\newcommand{\listequationsname}{Índice de ecuaciones}
+\newlistof{myequations}{equ}{\listequationsname}
+\newcommand{\myequations}[1]{%
+\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}\par}
+\setlength{\cftmyequationsnumwidth}{2.5em}  % Width of equation number in List of Equations
+
+\listofmyequations
+\cleardoublepage
+
+
+%\listoftables
+%\cleardoublepage
+
+%\printglossaries
+%\cleardoublepage
+
+% --------------------------
+% Body matter
+% --------------------------
+\pagenumbering{arabic}			% arabic page numbering
+\setcounter{page}{1}			% set page counter
+\pagestyle{maincontentstyle} 	% fancy header and footer
+
+\input{body/01_introduccion}
+\input{body/02_objetivos}
+\input{body/03_resultados}
+\input{body/04_discusion}
+\input{body/05_conclusiones}
+\input{body/06_futuro}
+
+\cleardoublepage
+
+
+% --------------------------
+% Back matter
+% --------------------------
+
+\begin{spacing}{1.1}
+	\setlength{\parskip}{0em}
+	\renewcommand{\bibfont}{\normalfont\small}
+	\setlength{\biblabelsep}{5pt}
+	\setlength{\bibitemsep}{0.5\baselineskip plus 0.5\baselineskip}
+	\printbibliography
+\end{spacing}
+\cleardoublepage
+
+\begin{appendices}
+	\input{back/01_prod_cientifica}
+\end{appendices}
+\cleardoublepage
+
+%\newpage
+%\mbox{}
+
+% **************************************************
+% End of Document CONTENT
+% **************************************************
+\end{document}

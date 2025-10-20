@@ -1,0 +1,58 @@
+%
+%   TITLE PAGES - COVERS
+%
+
+%%%%%%%%%%% MAIN COVER %%%%%%%%%%%%
+
+\newgeometry{margin=1in}
+\begin{titlepage}
+	\pdfbookmark[0]{Title and front pages}{Title and front pages}
+	\label{front:titlepage}
+	\tgherosfont
+
+
+	\vspace*{30pt}
+
+
+	{\huge  
+	\begin{spacing}{1.15}
+	\forceTitleIndent	
+		\thesisTitle 
+		\end{spacing}
+		}
+	
+	
+	\vspace*{40pt}
+	
+\begin{spacing}{0}
+	{\Large \thesisAuthor} 
+
+	\textcolor{udcColor}{\noindent\rule[-3.5ex]{\textwidth}{3pt}}
+	\textcolor{grayColor}{\noindent\rule{\textwidth}{2.5pt}}
+	\textcolor{udcColor}{\noindent\rule[3.5ex]{\textwidth}{3pt}}
+	{\large \thesisSubject} \\[0.001mm]	
+\end{spacing}	
+
+	\vspace*{80pt}
+
+    \textsf{\textbf{Directores:}} \\
+	\textsf{ \thesisFirstSupervisor} \\
+	\textsf{ \thesisSecondSupervisor}
+
+
+
+	\vspace*{120pt}
+
+{ \centering
+	\textsf{\thesisUniversityPhDProgramme} \\	
+	\vspace*{40pt}
+	\includegraphics[width=7.25cm]{img/udc} \\[1mm]
+}
+
+%	\begin{flushright}
+%	\scriptsize
+%	\textbf{Version}: \thesisVersion \\[0mm]
+%	\textbf{Compilation}: \today\ at \currenttime
+%	\end{flushright}
+\end{titlepage}
+\restoregeometry
